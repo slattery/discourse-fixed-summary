@@ -6,7 +6,7 @@ DiscoursePluginRegistry.serialized_current_user_fields << "fixed_summary_deliver
 
 after_initialize do
 
-  User.register_custom_field_type('fixed_summary_emails', :boolean)
+  User.register_custom_field_type('fixed_summary_emails', :bool)
   User.register_custom_field_type('fixed_summary_deliveries', :text)
 
   if SiteSetting.fixed_summary_enabled then
@@ -25,4 +25,3 @@ after_initialize do
     }
   end
 end
-  
