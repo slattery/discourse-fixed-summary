@@ -1,12 +1,6 @@
 en:
   user_preferences:
-    fixed_digest_emails:
-      default: false
-      client: true
-    fixed_digest_deliveries:
-      type: list
-      client: true
-  email:
-    fixed_digest_enabled:
-      default: true
-      client: true
+    fixed_digest_emails: "Enable fixed digest emails"
+    fixed_digest_deliveries: "Choose a fixed delivery schedule"
+  plugins:
+    fixed_digest_enabled: "Enable fixed digest emails sitewide"

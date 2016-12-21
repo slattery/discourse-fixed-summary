@@ -17,7 +17,7 @@
         - '1500'
         - '1600'
         - '1700'
-  email:
+  plugins:
     fixed_digest_enabled:
       default: true
       client: true
