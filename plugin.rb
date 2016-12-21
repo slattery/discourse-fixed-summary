@@ -1,5 +1,5 @@
 
-enabled_site_setting :fixed_summary_enabled
+enabled_site_setting :fixed_digest_enabled
 
 DiscoursePluginRegistry.serialized_current_user_fields << "fixed_digest_emails"
 DiscoursePluginRegistry.serialized_current_user_fields << "fixed_digest_deliveries"
