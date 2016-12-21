@@ -1,0 +1,12 @@
+en:
+  user_preferences:
+    fixed_digest_emails:
+      default: false
+      client: true
+    fixed_digest_deliveries:
+      type: list
+      client: true
+  email:
+    fixed_digest_enabled:
+      default: true
+      client: true

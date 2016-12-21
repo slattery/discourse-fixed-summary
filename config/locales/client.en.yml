@@ -1,0 +1,15 @@
+en:
+  user:
+    fixed_digest_emails
+      title: "Sent me summaries at fixed times regardless of visiting"
+    fixed_digest_deliveries:
+      '0800': "8:00a"
+      '0900': "9:00a"
+      '1000': "10:00a"
+      '1100': "11:00a"
+      '1200': "12:00p"
+      '1300': "1:00p"
+      '1400': "2:00p"
+      '1500': "3:00p"
+      '1600': "4:00p"
+      '1700': "5:00p"
