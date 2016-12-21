@@ -1,27 +1,40 @@
 
 enabled_site_setting :fixed_digest_enabled
 
-DiscoursePluginRegistry.serialized_current_user_fields << "fixed_digest_emails"
-DiscoursePluginRegistry.serialized_current_user_fields << "fixed_digest_deliveries"
-
 after_initialize do
+  require_dependency 'user_serializer'
 
-  User.register_custom_field_type('fixed_digest_emails', :bool)
-  User.register_custom_field_type('fixed_digest_deliveries', :text)
+  public_user_custom_fields_setting = SiteSetting.public_user_custom_fields
 
-  if SiteSetting.fixed_digest_enabled then
-    add_to_serializer(:post, :user_fixed_digest_emails, false) {
-        object.user.custom_fields['fixed_digest_emails']
-        object.user.custom_fields['fixed_digest_deliveries']
-    }
+  if public_user_custom_fields_setting.empty?
+    SiteSetting.set("public_user_custom_fields", "fixed_digest_emails|fixed_digest_deliveries")
+  else
+    if public_user_custom_fields_setting !~ /fixed_digest_emails/
+      SiteSetting.set(
+        "public_user_custom_fields",
+        [SiteSetting.public_user_custom_fields, "fixed_digest_emails"].join("|")
+      )
+    end
+    if public_user_custom_fields_setting !~ /fixed_digest_deliveries/
+      SiteSetting.set(
+        "public_user_custom_fields",
+        [SiteSetting.public_user_custom_fields, "fixed_digest_deliveries"].join("|")
+      )
+    end
+  end
 
-    # I guess this should be the default @ discourse. PR maybe?
-    add_to_serializer(:user, :custom_fields, false) {
-      if object.custom_fields == nil then
-        {}
-      else
-        object.custom_fields
+  class ::UserSerializer
+    alias_method :_custom_fields, :custom_fields
+    def custom_fields
+      if !object.custom_fields["fixed_digest_emails"]
+        object.custom_fields["fixed_digest_emails"] = ""
+        object.save
       end
-    }
+      if !object.custom_fields["fixed_digest_deliveries"]
+        object.custom_fields["fixed_digest_deliveries"] = ""
+        object.save
+      end
+      _custom_fields
+    end
   end
 end
