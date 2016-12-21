@@ -3,7 +3,8 @@ en:
     fixed_digest_emails:
       title: "Send me summaries at fixed times regardless of visiting"
     fixed_digest_deliveries:
-      title: "select hours of the day for your daily delivery schedule" 
+      title: "select hours of the day for your daily delivery schedule"
+      instructions: "type in the box and select hours of the day"
       '0800': "8:00a"
       '0900': "9:00a"
       '1000': "10:00a"
