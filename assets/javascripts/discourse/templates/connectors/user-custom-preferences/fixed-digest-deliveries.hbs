@@ -1,16 +1,16 @@
 {{#if siteSettings.fixed_digest_enabled}}
   <div class="control-group fixed_digest">
-    <label class="control-label">Signatures</label>
+    <label class="control-label">Fixed Digest</label>
     <div class="controls">
       <label class='checkbox-label'>
         {{input type="checkbox" checked=model.custom_fields.fixed_digest_emails}}
-        {{i18n 'user.fixed_digest_emails'}}
+        {{i18n 'user.fixed_digest_emails.title'}}
       </label>
     </div>
     <div class="controls">
-      <label>{{i18n 'user.fixed_digest_deliveries'}}</label>
+      <label>{{i18n 'user.fixed_digest_deliveries.title'}}</label>
       {{list-setting name="fixed_digest_deliveries" settingValue=model.custom_fields.fixed_digest_deliveries}}
     </div>
-    <div class="instructions">{{i18n 'user.fixed_digest_deliveries'}}</div>
+    <div class="instructions">{{i18n 'user.fixed_digest_deliveries.instructions'}}</div>
   </div>
 {{/if}}
