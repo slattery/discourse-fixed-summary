@@ -31,7 +31,7 @@ after_initialize do
         object.save
       end
       if !object.custom_fields["fixed_digest_deliveries"]
-        object.custom_fields["fixed_digest_deliveries"] = ""
+        object.custom_fields["fixed_digest_deliveries"] = "0900|1600"
         object.save
       end
       _custom_fields
