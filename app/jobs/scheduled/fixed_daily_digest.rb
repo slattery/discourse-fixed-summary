@@ -22,10 +22,10 @@ module Jobs
       # Users who want to receive digest email within their chosen digest email frequency
       query = User.real
                   .where(active: true, staged: false)
-                  .joins(:user_option)
+                  .joins(:user_custom_fields)
                   .not_suspended
-                  .where(user_options: {fixed_digest_emails: true})
-                  .where("fixed_digest_deliveries REGEXP ?", "#{match_str}")
+                  .where(user_custom_fields: {fixed_digest_emails: true})
+                  .where("user_custom_fields.fixed_digest_deliveries REGEXP ?", "#{match_str}")
                   
       # If the site requires approval, make sure the user is approved
       if SiteSetting.must_approve_users?
