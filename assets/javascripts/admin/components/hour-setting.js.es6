@@ -4,7 +4,7 @@
   @param settingValue is a reference to SiteSetting.value.
   @param choices is a reference to SiteSetting.choices
 **/
-export default Ember.TextField.extend({
+export default Ember.Component.extend({
   _select2FormatSelection: function(selectedObject, jqueryWrapper, htmlEscaper) {
     var text = selectedObject.text;
     if (text.length <= 6) {
@@ -16,6 +16,7 @@ export default Ember.TextField.extend({
   _initializeSelect2: function(){
   console.log('hoursetting1init');
 
+    var data = {}
     var options = {
       multiple: true,
       separator: "|",
