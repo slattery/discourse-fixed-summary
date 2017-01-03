@@ -20,7 +20,7 @@ export default Ember.TextField.extend({
       multiple: true,
       separator: "|",
       tokenSeparators: ["|"],
-      tags : this.get("choices") || [],
+      tags : this.get("choices").split("|") || [],
       width: 'off',
       dropdownCss: this.get("choices") ? {} : {display: 'none'},
       selectOnBlur: this.get("choices") ? false : true

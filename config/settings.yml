@@ -1,4 +1,4 @@
-plugins:
+user_preferences:
   fixed_digest_enabled:
     default: true
     client: true
