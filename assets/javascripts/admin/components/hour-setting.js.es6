@@ -5,7 +5,6 @@
   @param choices is a reference to SiteSetting.choices
 **/
 export default Ember.Component.extend({
-console.log('hoursetting1);
   _select2FormatSelection: function(selectedObject, jqueryWrapper, htmlEscaper) {
     var text = selectedObject.text;
     if (text.length <= 6) {
@@ -15,7 +14,7 @@ console.log('hoursetting1);
   },
 
   _initializeSelect2: function(){
-  console.log('hoursetting1init);
+  console.log('hoursetting1init');
 
     var options = {
       multiple: false,
