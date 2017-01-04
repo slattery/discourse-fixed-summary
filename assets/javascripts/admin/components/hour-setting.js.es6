@@ -24,7 +24,7 @@ export default Ember.TextField.extend({
     });
     
     return dta;
-  }
+  },
 
 
   _initializeSelect2: function(){  
