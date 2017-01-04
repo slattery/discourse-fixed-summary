@@ -4,7 +4,7 @@
   @param settingValue is a reference to SiteSetting.value.
   @param choices is a reference to SiteSetting.choices
 **/
-export default Ember.Component.extend({
+export default Ember.TextField.extend({
   _select2FormatSelection: function(selectedObject, jqueryWrapper, htmlEscaper) {
     var text = selectedObject.text;
     if (text.length <= 6) {
@@ -14,7 +14,8 @@ export default Ember.Component.extend({
   },
 
   _initializeSelect2: function(){
-    console.log('hoursetting1init');  
+    console.log('hoursetting1init');
+  
     var options = {
       multiple: true,
       separator: "|",
@@ -34,7 +35,7 @@ export default Ember.Component.extend({
 
 
     var self = this;
-    this.$("input.fixed_digest_dropdown").select2(options).on("change", function(obj) {
+    this.$().select2(options).on("change", function(obj) {
       self.set("settingValue", obj.val.join("|"));
       self.refreshSortables();
     });
@@ -43,13 +44,13 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   refreshOnReset: function() {
-    this.$("input").select2("val", this.get("settingValue").split("|"));
+    this.$().select2("val", this.get("settingValue").split("|"));
   }.observes("settingValue"),
 
   refreshSortables: function() {
     var self = this;
     this.$("ul.select2-choices").sortable().on('sortupdate', function() {
-      self.$("input").select2("onSortEnd");
+      self.$().select2("onSortEnd");
     });
   }
 });
