@@ -13,12 +13,12 @@ export default Ember.TextField.extend({
     return htmlEscaper(text);
   },
 
-  _seedSelect2Data: function(){
-    var chs = this.get("choices").split("|") || [];
+  _seedSelect2Data: function(param, txtsrc){
+    var chs = this.get(param).split("|") || [];
     var dta = [];
 
     chs.forEach(function(c) {
-      var loc = I18n.t('user.fixed_digest_deliveries.'+ c);
+      var loc = I18n.t(txtsrc +'.'+ c);
       var txt = loc || c;
       dta.push({id: c, text: txt });
     });
@@ -32,10 +32,14 @@ export default Ember.TextField.extend({
       multiple: true,
       separator: "|",
       tokenSeparators: ["|"],
-      data : this._seedSelect2Data(),
+      data : this._seedSelect2Data('choices', 'user.fixed_digest_deliveries'),
       width: 'off',
       dropdownCss: this.get("choices") ? {} : {display: 'none'},
-      selectOnBlur: this.get("choices") ? false : true
+      selectOnBlur: this.get("choices") ? false : true,
+      initSelection(element, callback) {
+        var initd = this._seedSelect2Data('settingValue', 'user.fixed_digest_deliveries');
+        callback(initd);
+      }
     };
 
     var settingName = this.get('settingName');
