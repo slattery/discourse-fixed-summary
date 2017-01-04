@@ -14,9 +14,9 @@ export default Ember.Component.extend({
   },
 
   _initializeSelect2: function(){
-  console.log('hoursetting1init');
-
-    var data = {}
+    console.log('hoursetting1init');
+    this.$().append( $("input"));
+  
     var options = {
       multiple: true,
       separator: "|",
