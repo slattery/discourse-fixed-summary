@@ -14,9 +14,7 @@ export default Ember.Component.extend({
   },
 
   _initializeSelect2: function(){
-    console.log('hoursetting1init');
-    this.$().append( $("input"));
-  
+    console.log('hoursetting1init');  
     var options = {
       multiple: true,
       separator: "|",
@@ -36,7 +34,7 @@ export default Ember.Component.extend({
 
 
     var self = this;
-    this.$("input").select2(options).on("change", function(obj) {
+    this.$("input.fixed_digest_dropdown").select2(options).on("change", function(obj) {
       self.set("settingValue", obj.val.join("|"));
       self.refreshSortables();
     });
