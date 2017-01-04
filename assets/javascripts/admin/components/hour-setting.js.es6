@@ -13,14 +13,26 @@ export default Ember.TextField.extend({
     return htmlEscaper(text);
   },
 
-  _initializeSelect2: function(){
-    console.log('hoursetting1init');
-  
+  _seedSelect2Data: function(){
+    var chs = this.get("choices").split("|") || [];
+    var dta = [];
+
+    chs.forEach(function(c) {
+      var loc = I18n.t('user.fixed_digest_deliveries.'+ c);
+      var txt = loc || c;
+      dta.push({id: c, text: txt });
+    });
+    
+    return dta;
+  }
+
+
+  _initializeSelect2: function(){  
     var options = {
       multiple: true,
       separator: "|",
       tokenSeparators: ["|"],
-      tags : this.get("choices").split("|") || [],
+      data : this._seedSelect2Data(),
       width: 'off',
       dropdownCss: this.get("choices") ? {} : {display: 'none'},
       selectOnBlur: this.get("choices") ? false : true
