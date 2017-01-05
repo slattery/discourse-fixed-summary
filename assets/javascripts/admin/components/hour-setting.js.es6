@@ -29,6 +29,8 @@ export default Ember.TextField.extend({
 
 
   _initializeSelect2: function(){  
+    var self = this;
+    
     var options = {
       multiple: true,
       separator: "|",
@@ -38,23 +40,20 @@ export default Ember.TextField.extend({
       dropdownCss: this.get("choices") ? {} : {display: 'none'},
       selectOnBlur: this.get("choices") ? false : true,
       initSelection(element, callback) {
-        var initd = this._seedSelect2Data('settingValue', 'user.fixed_digest_deliveries');
+        console.log('initting');
+        var initd = self._seedSelect2Data('settingValue', 'user.fixed_digest_deliveries');
         callback(initd);
       }
     };
 
     var settingName = this.get('settingName');
-    var sV =  this.get('settingValue');
     
     if (typeof settingName === 'string' && settingName.indexOf('colors') > -1) {
       options.formatSelection = this._select2FormatSelection;
     }
       console.log(options);
-      console.log(settingName);
-      console.log(sV);
 
 
-    var self = this;
     this.$().select2(options).on("change", function(obj) {
       self.set("settingValue", obj.val.join("|"));
       self.refreshSortables();
