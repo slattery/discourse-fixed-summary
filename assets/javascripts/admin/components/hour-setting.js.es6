@@ -54,7 +54,7 @@ export default Ember.TextField.extend({
       self.refreshSortables();
     });
     
-    this.$().select2("val", this.get("settingValue").split("|")).trigger("change");
+    this.$().select2("val", this.get("settingValue").split("|"));
     //this.refreshSortables();
     
   }.on('didInsertElement'),
