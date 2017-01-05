@@ -14,6 +14,7 @@ export default Ember.TextField.extend({
   },
 
   _seedSelect2Data: function(param, txtsrc){
+    console.log("seed ", param);
     var chs = this.get(param).split("|") || [];
     var dta = [];
 
@@ -43,11 +44,14 @@ export default Ember.TextField.extend({
     };
 
     var settingName = this.get('settingName');
+    var sV =  this.get('settingValue');
+    
     if (typeof settingName === 'string' && settingName.indexOf('colors') > -1) {
       options.formatSelection = this._select2FormatSelection;
     }
       console.log(options);
       console.log(settingName);
+      console.log(sV);
 
 
     var self = this;
