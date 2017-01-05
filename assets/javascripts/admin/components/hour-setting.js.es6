@@ -38,12 +38,7 @@ export default Ember.TextField.extend({
       data : this._seedSelect2Data('choices', 'user.fixed_digest_deliveries'),
       width: 'off',
       dropdownCss: this.get("choices") ? {} : {display: 'none'},
-      selectOnBlur: this.get("choices") ? false : true,
-      initSelection(element, callback) {
-        console.log('initting');
-        var initd = self._seedSelect2Data('settingValue', 'user.fixed_digest_deliveries');
-        callback(initd);
-      }
+      selectOnBlur: this.get("choices") ? false : true
     };
 
     var settingName = this.get('settingName');
@@ -58,8 +53,10 @@ export default Ember.TextField.extend({
       self.set("settingValue", obj.val.join("|"));
       self.refreshSortables();
     });
-
-    this.refreshSortables();
+    
+    this.$().select2("val", this.get("settingValue").split("|")).trigger("change");
+    //this.refreshSortables();
+    
   }.on('didInsertElement'),
 
   refreshOnReset: function() {
