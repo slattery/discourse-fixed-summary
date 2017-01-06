@@ -25,7 +25,7 @@ module Jobs
       # Users who want to receive digest email within their chosen digest email frequency
       query = User.real
                   .where(active: true, staged: false)
-                  .joins(:user_custom_field)
+                  .joins("INNER JOIN user_custom_fields ON user_custom_fields.user_id = users.id")
                   .not_suspended
                   .where({"user_custom_fields.fixed_digest_emails" => true})
                   .where("user_custom_fields.fixed_digest_deliveries ~* ?", "#{@match_str}")
