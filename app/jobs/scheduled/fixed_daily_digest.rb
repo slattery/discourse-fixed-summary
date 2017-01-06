@@ -3,8 +3,9 @@ module Jobs
   class EnqueueFixedDigestEmails < Jobs::Scheduled
     every 15.minutes
 
-    match_day = Time.parse(Time.now.in_time_zone('America/New_York'))
-    match_hrs = match_day.hour.hours
+    #match_day = Time.parse(Time.now.in_time_zone('America/New_York'))
+    match_hrs = Time.now.in_time_zone('America/New_York').hour
+    #match_day.hour.hour
     match_arr = %w[0000 0100 0200 0300 0400 0500 0600 0700 0800 0900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300];
     match_str = match_arr.at(match_hrs) || '0000'
 
