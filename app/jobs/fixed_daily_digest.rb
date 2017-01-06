@@ -1,6 +1,6 @@
-module Jobs
+module FixedDigest
   # A daily job that will enqueue digest emails to be sent to users at fixed times
-  class EnqueueFixedDigestEmails < Jobs::Scheduled
+  class EnqueueFixedDigestEmails < ::Jobs::Scheduled
     every 1.hours
 
     match_day = Time.parse(Time.now.in_time_zone('America/New_York'))
@@ -11,9 +11,9 @@ module Jobs
     def execute(args)
       if SiteSetting.fixed_digest_enabled?
         if match_hrs >= 7 && match_hrs <= 16
-          Rails.logger.info("fixed summaries trying to match users for #{match_str}")
+          Rails.logger.warn("fixed summaries trying to match users for #{match_str}")
           target_user_ids.each do |user_id|
-            Rails.logger.info("fixed summaries trying to send digest to #{user_id} for #{match_str} delivery")
+            Rails.logger.warn("fixed summaries trying to send digest to #{user_id} for #{match_str} delivery")
             Jobs.enqueue(:user_email, type: :mailing_list, user_id: user_id)
           end
         end
