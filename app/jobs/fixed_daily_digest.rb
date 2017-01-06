@@ -9,15 +9,15 @@ module FixedDigest
     match_str = match_arr.at(match_hrs) ||= '0000'
 
     def execute(args)
-      if SiteSetting.fixed_digest_enabled?
-        if match_hrs >= 7 && match_hrs <= 16
+#      if SiteSetting.fixed_digest_enabled?
+#        if match_hrs >= 7 && match_hrs <= 16
           Rails.logger.warn("fixed summaries trying to match users for #{match_str}")
           target_user_ids.each do |user_id|
             Rails.logger.warn("fixed summaries trying to send digest to #{user_id} for #{match_str} delivery")
             Jobs.enqueue(:user_email, type: :mailing_list, user_id: user_id)
           end
-        end
-      end
+#        end
+#      end
     end
 
     def target_user_ids
@@ -30,9 +30,9 @@ module FixedDigest
                   .where("user_custom_fields.fixed_digest_deliveries REGEXP ?", "#{match_str}")
                   
       # If the site requires approval, make sure the user is approved
-      if SiteSetting.must_approve_users?
-        query = query.where("approved OR moderator OR admin")
-      end      
+#      if SiteSetting.must_approve_users?
+#        query = query.where("approved OR moderator OR admin")
+#      end      
       query.pluck(:id)
     end
     
