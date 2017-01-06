@@ -25,16 +25,16 @@ module Jobs
       # Users who want to receive digest email within their chosen digest email frequency
       query = User.real
                   .where(active: true, staged: false)
-                  .joins("INNER JOIN user_custom_fields ON user_custom_fields.user_id = users.id")
-                  .not_suspended
-                  .where({"user_custom_fields.fixed_digest_emails" => true})
-                  .where("user_custom_fields.fixed_digest_deliveries ~* ?", "#{@match_str}")
+                  .joins("INNER JOIN user_custom_fields ok ON ok.user_id = users.id")
+                  .where("ok.name = 'fixed_digest_emails' AND ok.value = 'true'")
+                  .joins("INNER JOIN user_custom_fields deliveries ON deliveries.user_id = users.id")                  
+                  .where( "deliveries.fixed_digest_deliveries ~* ?", "#{@match_str}" )
                   
       # If the site requires approval, make sure the user is approved
       if SiteSetting.must_approve_users?
         query = query.where("approved OR moderator OR admin")
       end      
-      query.pluck(:user_id)
+      query.pluck('deliveries.user_id')
     end
     
   end
