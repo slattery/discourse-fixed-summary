@@ -2,7 +2,7 @@ en:
   js:
     user:
       fixed_digest_emails:
-        title: "Send me summaries at fixed times regardless of visiting"
+        title: "Send me email digests at fixed times"
       fixed_digest_deliveries:
         title: "Select hours of the day for your daily delivery schedule"
         instructions: "Type in the box and select hours of the day"
@@ -15,4 +15,5 @@ en:
         "1400": '2:00p'
         "1500": '3:00p'
         "1600": '4:00p'
-        "1700": '5:00p'
+        "1700": '5:00p'        
+        "1800": '6:00p'

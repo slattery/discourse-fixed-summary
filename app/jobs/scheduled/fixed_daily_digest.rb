@@ -11,7 +11,7 @@ module Jobs
       @match_str = match_arr.at(match_hrs) || '0000'
 
       if SiteSetting.fixed_digest_enabled?
-        if match_hrs >= 7 && match_hrs <= 16
+        if match_hrs >= 7 && match_hrs <= 20
           Rails.logger.warn("fixed summaries trying to match users for #{@match_str}")
           target_user_ids.each do |user_id|
             Rails.logger.warn("fixed summaries trying to send digest to #{user_id} for #{@match_str} delivery")
