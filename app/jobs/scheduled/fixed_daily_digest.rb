@@ -3,7 +3,7 @@ module Jobs
   class EnqueueFixedDigestEmails < Jobs::Scheduled
     every 1.hours
 
-    match_day = Time.parse(Time.now)
+    match_day = Time.parse(Time.now.in_time_zone('America/New_York'))
     match_hrs = match_day.hour.hours
     match_arr = %w[0000 0100 0200 0300 0400 0500 0600 0700 0800 0900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000 2100 2200 2300];
     match_str = match_arr.at(match_hrs) ||= '0000'
@@ -11,8 +11,10 @@ module Jobs
     def execute(args)
       if SiteSetting.fixed_digest_enabled?
         if match_hrs >= 7 && match_hrs <= 16
+          log "fixed summaries trying to match users for #{match_str}"
           target_user_ids.each do |user_id|
-            Jobs.enqueue(:user_email, type: :digest, user_id: user_id)
+            log "fixed summaries trying to send digest to #{user_id} for #{match_str} delivery"
+            Jobs.enqueue(:user_email, type: :mailing_list, user_id: user_id)
           end
         end
       end
