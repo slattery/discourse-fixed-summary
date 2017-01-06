@@ -37,4 +37,7 @@ after_initialize do
       _custom_fields
     end
   end
+  
+  load File.expand_path("../app/jobs/scheduled/fixed_daily_digest.rb", __FILE__)
+
 end
