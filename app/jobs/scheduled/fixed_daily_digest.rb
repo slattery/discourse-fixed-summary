@@ -28,7 +28,7 @@ module Jobs
                   .joins("INNER JOIN user_custom_fields ok ON ok.user_id = users.id")
                   .where("ok.name = 'fixed_digest_emails' AND ok.value = 'true'")
                   .joins("INNER JOIN user_custom_fields deliveries ON deliveries.user_id = users.id")                  
-                  .where( "deliveries.fixed_digest_deliveries ~* ?", "#{@match_str}" )
+                  .where( "deliveries.name = 'fixed_digest_deliveries' AND deliveries.value ~* ?", "#{@match_str}" )
                   
       # If the site requires approval, make sure the user is approved
       if SiteSetting.must_approve_users?
