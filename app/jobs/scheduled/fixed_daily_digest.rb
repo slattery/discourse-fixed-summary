@@ -27,7 +27,7 @@ module Jobs
                   .where(active: true, staged: false)
                   .joins(:user_custom_fields)
                   .not_suspended
-                  .where("user_custom_fields.fixed_digest_emails" => true})
+                  .where({"user_custom_fields.fixed_digest_emails" => true})
                   .where("user_custom_fields.fixed_digest_deliveries REGEXP ?", "#{@match_str}")
                   
       # If the site requires approval, make sure the user is approved
