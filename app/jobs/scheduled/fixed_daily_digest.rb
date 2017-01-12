@@ -6,7 +6,7 @@ module Jobs
     def execute(args)    
       if SiteSetting.fixed_digest_enabled?
         (1..12).each do |n|
-          Jobs.enqueue_at(n.hours.from_now, :process_fixed_digest {})
+          Jobs.enqueue_at(n.hours.from_now, :process_fixed_digest, {})
         end
       end
     end
