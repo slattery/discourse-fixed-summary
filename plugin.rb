@@ -39,5 +39,6 @@ after_initialize do
   end
   
   load File.expand_path("../app/jobs/scheduled/fixed_daily_digest.rb", __FILE__)
+  load File.expand_path("../app/jobs/regular/process_fixed_digest.rb", __FILE__)
 
 end
