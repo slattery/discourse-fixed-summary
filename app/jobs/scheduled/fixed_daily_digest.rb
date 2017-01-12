@@ -1,7 +1,7 @@
 module Jobs
   # A daily job that will enqueue digest emails to be sent to users at fixed times
   class EnqueueFixedDigestEmails < Jobs::Scheduled
-    at 6.hours
+    daily at 6.hours
       
     def execute(args)    
       if SiteSetting.fixed_digest_enabled?
