@@ -1,3 +1,8 @@
+# name: discourse-fixed-summary
+# about: Discourse Fixed Summary
+# version: 0.1
+# authors: Mike Slattery
+# url: https://github.com/slattery/discourse-fixed-summary
 
 enabled_site_setting :fixed_digest_enabled
 
