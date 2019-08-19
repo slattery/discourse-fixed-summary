@@ -42,8 +42,11 @@ after_initialize do
       _custom_fields
     end
   end
-  
+
   load File.expand_path("../app/jobs/scheduled/fixed_daily_digest.rb", __FILE__)
   load File.expand_path("../app/jobs/regular/process_fixed_digest.rb", __FILE__)
+  load File.expand_path("../app/jobs/regular/fixed_digest_user_email.rb", __FILE__)
+  load File.expand_path("../app/mailers/fixed_digest_user_notifications.rb", __FILE__)
+  load File.expand_path("../app/helpers/fixed_digest_user_notifications_helper.rb", __FILE__)
 
 end

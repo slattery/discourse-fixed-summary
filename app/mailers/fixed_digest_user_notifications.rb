@@ -12,6 +12,7 @@ class FixedDigestUserNotifications < ActionMailer::Base
   include ApplicationHelper
   helper :application, :email
   default charset: 'UTF-8'
+  prepend_view_path(Rails.root.join('plugins', 'discourse-fixed-summary', 'app', 'views'))
   layout 'email_template'
 
   include Email::BuildEmailHelper
