@@ -84,11 +84,11 @@ module FixedDigestUserNotificationsHelper
   end
 
   def digest_custom_html(position_key)
-    digest_custom "user_notifications.digest.custom.html.#{position_key}"
+    digest_custom "fixed_digest_user_notifications.digest.custom.html.#{position_key}"
   end
 
   def digest_custom_text(position_key)
-    digest_custom "user_notifications.digest.custom.text.#{position_key}"
+    digest_custom "fixed_digest_user_notifications.digest.custom.text.#{position_key}"
   end
 
   def digest_custom(i18n_key)
