@@ -1,3 +1,65 @@
 en:
   site_settings:
     fixed_digest_enabled: "Enable fixed digest emails sitewide"
+
+  fixed_digest_user_notifications:
+    previous_discussion: "Previous Replies"
+    reached_limit:
+      one: "Heads up: We send a maximum of %{count} daily email. Check the site to see the ones that might be held back."
+      other: "Heads up: We send a maximum of %{count} daily emails. Check the site to see the ones that might be held back. PS thanks for being recent!"
+    in_reply_to: "In Reply To"
+    unsubscribe:
+      title: "Unsubscribe"
+      description: "Not interested in getting these emails? No problem! Click below to unsubscribe instantly:"
+
+    header_instructions: ""
+    reply_by_email: "[Visit Topic](%{base_url}%{url}) or reply to this email to respond."
+    reply_by_email_pm: "[Visit Message](%{base_url}%{url}) or reply to this email to respond to %{participants}."
+    only_reply_by_email: "Reply to this email to respond."
+    only_reply_by_email_pm: "Reply to this email to respond to %{participants}."
+    visit_link_to_respond: "[Visit Topic](%{base_url}%{url}) to respond."
+    visit_link_to_respond_pm: "[Visit Message](%{base_url}%{url}) to respond to %{participants}."
+
+    posted_by: "Posted by %{username} on %{post_date}"
+
+    digest:
+      why: "A brief summary of %{site_link} since your last visit on %{last_seen_at}"
+      since_last_visit: "Since your last visit"
+      new_topics: "New Topics"
+      unread_messages: "Unread Messages"
+      unread_notifications: "Unread Notifications"
+      liked_received: "Likes Received"
+      new_users: "New Users"
+      recent_topics: "recent Topics"
+      follow_topic: "Follow this topic"
+      join_the_discussion: "Read More"
+      recent_posts: "recent Posts"
+      more_new: "New for you"
+      subject_template: "[%{email_prefix}] Summary"
+      unsubscribe: "This summary is sent from %{site_link} when we haven't seen you in a while. Change %{email_preferences_link}, or %{unsubscribe_link} to unsubscribe."
+      your_email_settings: "your email settings"
+      click_here: "click here"
+      from: "%{site_name} summary"
+      preheader: "A brief summary since your last visit on %{last_seen_at}"
+      custom:
+        html:
+          header: ""
+          below_post_1: ""
+          below_post_2: ""
+          below_post_3: ""
+          below_post_4: ""
+          below_post_5: ""
+          above_recent_topics: ""
+          below_recent_topics: ""
+          above_footer: ""
+          below_footer: ""
+        text:
+          below_post_1: ""
+          below_post_2: ""
+          below_post_3: ""
+          below_post_4: ""
+          below_post_5: ""
+          above_recent_topics: ""
+          below_recent_topics: ""
+          above_footer: ""
+          below_footer: ""
