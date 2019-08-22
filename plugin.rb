@@ -1,6 +1,6 @@
 # name: discourse-fixed-summary
 # about: Discourse Fixed Summary
-# version: 0.1
+# version: 0.2
 # authors: Mike Slattery
 # url: https://github.com/slattery/discourse-fixed-summary
 
@@ -43,10 +43,12 @@ after_initialize do
     end
   end
 
-  load File.expand_path("../app/jobs/scheduled/fixed_daily_digest.rb", __FILE__)
-  load File.expand_path("../app/jobs/regular/process_fixed_digest.rb", __FILE__)
-  load File.expand_path("../app/jobs/regular/fixed_digest_user_email.rb", __FILE__)
-  load File.expand_path("../app/mailers/fixed_digest_user_notifications.rb", __FILE__)
-  load File.expand_path("../app/helpers/fixed_digest_user_notifications_helper.rb", __FILE__)
+  [
+    '../app/jobs/scheduled/fixed_daily_digest.rb',
+    '../app/jobs/regular/process_fixed_digest.rb',
+    '../app/jobs/regular/fixed_digest_user_email.rb',
+    '../app/mailers/fixed_digest_user_notifications.rb',
+    '../app/helpers/fixed_digest_user_notifications_helper.rb'
+   ].each { |path| load File.expand_path(path, __FILE__) }
 
 end

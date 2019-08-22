@@ -6,6 +6,8 @@ require_dependency 'age_words'
 require_dependency 'rtl'
 require_dependency 'discourse_ip_info'
 require_dependency 'browser_detection'
+require_relative   '../helpers/fixed_digest_user_notifications_helper.rb'
+
 
 class FixedDigestUserNotifications < ActionMailer::Base
   include FixedDigestUserNotificationsHelper
@@ -28,7 +30,7 @@ class FixedDigestUserNotifications < ActionMailer::Base
   def digest(user, opts = {})
     build_summary_for(user)
     min_date = opts[:since] || user.last_emailed_at || user.last_seen_at || 1.month.ago
-
+    Rails.logger.warn("fixed summary - entering digest func")
     # Fetch some topics and posts to show
     digest_opts = { limit: SiteSetting.digest_topics + SiteSetting.digest_other_topics, top_order: true }
     topics_for_digest = Topic.for_digest(user, min_date, digest_opts).to_a
@@ -57,7 +59,7 @@ class FixedDigestUserNotifications < ActionMailer::Base
       @excerpts = {}
 
       @recent_topics.map do |t|
-        @excerpts[t.first_post.id] = email_excerpt(t.first_post.cooked, t.first_post) if t.first_post.present?
+        @excerpts[t.first_post.id] = FixedDigestUserNotificationsHelper.email_excerpt(t.first_post.cooked, t.first_post) if t.first_post.present?
       end
 
       # Try to find 3 interesting stats for the top of the digest

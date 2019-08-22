@@ -20,10 +20,10 @@
 --------------------------------------------------------------------------------
 
 <%- end %>
-<%= digest_custom_text("below_post_#{i+1}") %>
+<%= FixedDigestUserNotificationsHelper.digest_custom_text("below_post_#{i+1}") %>
 <%- end %>
 <%- end %>
-<%= digest_custom_text("above_recent_topics") %>
+<%= FixedDigestUserNotificationsHelper.digest_custom_text("above_recent_topics") %>
 
 <%- if @recent_posts.present? %>
 ### <%=t 'fixed_digest_user_notifications.digest.recent_posts' %>
@@ -45,11 +45,11 @@
 <%- end -%>
 <%- end %>
 
-<%= digest_custom_text("below_recent_topics") %>
+<%= FixedDigestUserNotificationsHelper.digest_custom_text("below_recent_topics") %>
 
 <%= raw(@markdown_linker.references) %>
 
-<%= digest_custom_text("above_footer") %>
+<%= FixedDigestUserNotificationsHelper.digest_custom_text("above_footer") %>
 <%=raw(t :'fixed_digest_user_notifications.digest.unsubscribe',
      site_link: site_link,
      email_preferences_link: raw(@markdown_linker.create(t('fixed_digest_user_notifications.digest.your_email_settings'), '/my/preferences/emails')),
@@ -57,4 +57,4 @@
 
 <%= raw(@markdown_linker.references) %>
 
-<%= digest_custom_text("below_footer") %>
+<%= FixedDigestUserNotificationsHelper.digest_custom_text("below_footer") %>

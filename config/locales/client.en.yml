@@ -6,8 +6,6 @@ en:
       fixed_digest_deliveries:
         title: "Select hours of the day for your daily delivery schedule"
         instructions: "Type in the box and select hours of the day"
-        "0800": '8:00a'
-        "0900": '9:00a'
         "1000": '10:00a'
         "1100": '11:00a'
         "1200": '12:00p'
@@ -15,5 +13,3 @@ en:
         "1400": '2:00p'
         "1500": '3:00p'
         "1600": '4:00p'
-        "1700": '5:00p'        
-        "1800": '6:00p'

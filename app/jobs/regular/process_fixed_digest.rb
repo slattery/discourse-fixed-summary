@@ -13,7 +13,7 @@ module Jobs
           Rails.logger.warn("fixed summaries trying to match users for #{@match_str}")
           target_user_ids.each do |user_id|
             Rails.logger.warn("fixed summaries trying to send digest to #{user_id} for #{@match_str} delivery")
-            Jobs.enqueue(:fixed_digest_user_email, type: :digest, user_id: user_id)
+            Jobs.enqueue(:fixed_digest_user_email, type: :digest, since: 1.day.ago, user_id: user_id)
           end
         #end
       end

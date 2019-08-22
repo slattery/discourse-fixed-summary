@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_dependency 'email/sender'
-require_dependency 'fixed_digest_user_notifications'
+require_relative   '../../mailers/fixed_digest_user_notifications.rb'
 
 module Jobs
 
@@ -35,6 +35,8 @@ module Jobs
 
       return skip(SkippedEmailLog.reason_types[:user_email_no_user]) unless user
 
+      Rails.logger.warn("[FIXED SUMMARY] entering message builder")
+
       message, skip_reason_type = message_for_email(
         user,
         post,
@@ -44,6 +46,7 @@ module Jobs
       )
 
       if message
+        Rails.logger.warn("[FIXED SUMMARY] output is #{message}")
         Email::Sender.new(message, type, user).send
 
         if (b = user.user_stat.bounce_score) > SiteSetting.bounce_score_erode_on_send
@@ -77,16 +80,18 @@ module Jobs
         return skip_message(SkippedEmailLog.reason_types[:user_email_user_suspended_not_pm])
       end
 
+
+      interval = SiteSetting.default_email_digest_frequency.to_s
+      Rails.logger.warn("[FIXED SUMMARY] interval is #{interval}")
+
       if type.to_s == "digest"
         return if user.staged
-        return if user.last_emailed_at &&
-          user.last_emailed_at >
-            (user.user_option&.digest_after_minutes || SiteSetting.default_email_digest_frequency.to_i).minutes.ago
       end
 
       email_args = {}
 
       email_args[:post] = post if post
+      email_args[:since] = args[:since] if args[:since]
 
       # Make sure that mailer exists
       raise Discourse::InvalidParameters.new("type=#{type}") unless FixedDigestUserNotifications.respond_to?(type)
