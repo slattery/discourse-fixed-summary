@@ -10,9 +10,9 @@ module Jobs
 
       if SiteSetting.fixed_digest_enabled?
         #if match_hrs >= 7 && match_hrs <= 20
-          Rails.logger.warn("fixed summaries trying to match users for #{@match_str}")
+          Rails.logger.warn("[FIXED SUMMARY] trying to match users for #{@match_str}")
           target_user_ids.each do |user_id|
-            Rails.logger.warn("fixed summaries trying to send digest to #{user_id} for #{@match_str} delivery")
+            Rails.logger.warn("[FIXED SUMMARY] trying to send digest to #{user_id} for #{@match_str} delivery")
             Jobs.enqueue(:fixed_digest_user_email, type: :digest, since: 1.day.ago, user_id: user_id)
           end
         #end

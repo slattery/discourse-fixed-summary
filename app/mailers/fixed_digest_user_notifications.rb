@@ -27,10 +27,15 @@ class FixedDigestUserNotifications < ActionMailer::Base
     end
   end
 
+  def full_datetime(dt)
+      I18n.l(dt, format: :long)
+  end
+
   def digest(user, opts = {})
     build_summary_for(user)
     min_date = opts[:since] || user.last_emailed_at || user.last_seen_at || 1.month.ago
-    Rails.logger.warn("fixed summary - entering digest func")
+    min_date_str = min_date.to_s
+    Rails.logger.warn("[FIXED SUMMARY]  entering digest func with #{min_date_str}")
     # Fetch some topics and posts to show
     digest_opts = { limit: SiteSetting.digest_topics + SiteSetting.digest_other_topics, top_order: true }
     topics_for_digest = Topic.for_digest(user, min_date, digest_opts).to_a
@@ -59,7 +64,7 @@ class FixedDigestUserNotifications < ActionMailer::Base
       @excerpts = {}
 
       @recent_topics.map do |t|
-        @excerpts[t.first_post.id] = FixedDigestUserNotificationsHelper.email_excerpt(t.first_post.cooked, t.first_post) if t.first_post.present?
+        @excerpts[t.first_post.id] = FixedDigestUserNotificationsHelper.format_for_email(t.first_post, nil) if t.first_post.present?
       end
 
       # Try to find 3 interesting stats for the top of the digest
@@ -78,16 +83,6 @@ class FixedDigestUserNotifications < ActionMailer::Base
 
       value = user.unread_private_messages
       @counts << { label_key: 'fixed_digest_user_notifications.digest.unread_messages', value: value, href: "#{Discourse.base_url}/my/messages" } if value > 0
-
-      if @counts.size < 3
-        value = user.unread_notifications_of_type(Notification.types[:liked])
-        @counts << { label_key: 'fixed_digest_user_notifications.digest.liked_received', value: value, href: "#{Discourse.base_url}/my/notifications" } if value > 0
-      end
-
-      if @counts.size < 3
-        value = User.real.where(active: true, staged: false).not_suspended.where("created_at > ?", min_date).count
-        @counts << { label_key: 'fixed_digest_user_notifications.digest.new_users', value: value, href: "#{Discourse.base_url}/about" } if value > 0
-      end
 
       @last_seen_at = short_date(user.last_seen_at || user.created_at)
 

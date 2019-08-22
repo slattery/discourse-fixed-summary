@@ -15,6 +15,10 @@ module FixedDigestUserNotificationsHelper
     result
   end
 
+  def self.fullength_datetime(dt)
+      I18n.l(dt, format: :long)
+  end
+
   def self.correct_top_margin(html, desired)
     fragment = Nokogiri::HTML.fragment(html)
     if para = fragment.css("p:first").first
